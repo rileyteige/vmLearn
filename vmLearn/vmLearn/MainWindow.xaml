@@ -1,8 +1,22 @@
 ﻿<Window x:Class="vmLearn.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+		xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
+		xmlns:resx="clr-namespace:vmLearn.Resources"
+        Title="{x:Static resx:OurResources.AppTitle}"
+		Width="1024" Height="640"
+		WindowStyle="SingleBorderWindow"
+		ResizeMode="CanResizeWithGrip"
+		Background="{StaticResource mainWindowBackgroundBrush}"
+		MouseLeftButtonDown="Window_MouseLeftButtonDown">	
+	
+	<shell:WindowChrome.WindowChrome>
+		<shell:WindowChrome CaptionHeight="35"
+							GlassFrameThickness="0,0,0,1"
+							ResizeBorderThickness="5" />
+	</shell:WindowChrome.WindowChrome>
+	
     <Grid>
-        
-    </Grid>
+		
+	</Grid>
 </Window>
