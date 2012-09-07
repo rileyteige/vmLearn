@@ -1,12 +1,25 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
     
 	<!-- Colors -->
 	
-	<Color x:Key="mainWindowBackgroundColor">#FFFFFF</Color>
+	<Color x:Key="MainWindowBackgroundColor">#FFFFFF</Color>
+	<Color x:Key="ToolbarButtonHoverColor">#EBEBEB</Color>
+	<Color x:Key="ToolbarButtonClickColor">#3697FF</Color>
+	<Color x:Key="UIFontColor">#000000</Color>
+	<Color x:Key="UILightFontColor">#B8B8B8</Color>
 	
 	<!-- Brushes -->
 	
-	<SolidColorBrush x:Key="mainWindowBackgroundBrush" Color="{StaticResource mainWindowBackgroundColor}" />
+	<SolidColorBrush x:Key="MainWindowBackgroundBrush" Color="{StaticResource MainWindowBackgroundColor}" />
+	<SolidColorBrush x:Key="ToolbarButtonHoverBrush" Color="{StaticResource ToolbarButtonHoverColor}" />
+	<SolidColorBrush x:Key="ToolbarButtonClickBrush" Color="{StaticResource ToolbarButtonClickColor}" />
+	<SolidColorBrush x:Key="UIFontBrush" Color="{StaticResource UIFontColor}" />
+	<SolidColorBrush x:Key="UILightFontBrush" Color="{StaticResource UILightFontColor}" />
+	
+	<!-- Numerical Values -->
+	
+	<sys:Double x:Key="MainWindowToolbarHeight">35.0</sys:Double>
 	
 </ResourceDictionary>

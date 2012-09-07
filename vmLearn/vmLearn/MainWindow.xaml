@@ -7,7 +7,7 @@
 		Width="1024" Height="640"
 		WindowStyle="SingleBorderWindow"
 		ResizeMode="CanResizeWithGrip"
-		Background="{StaticResource mainWindowBackgroundBrush}"
+		Background="{StaticResource MainWindowBackgroundBrush}"
 		MouseLeftButtonDown="Window_MouseLeftButtonDown">	
 	
 	<shell:WindowChrome.WindowChrome>
@@ -16,7 +16,59 @@
 							ResizeBorderThickness="5" />
 	</shell:WindowChrome.WindowChrome>
 	
-    <Grid>
+	<Window.Resources>
 		
-	</Grid>
+		<Style x:Key="ToolbarButton" TargetType="{x:Type Button}">
+			
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Trigger.Setters>
+						<Setter Property="Background" Value="{StaticResource ToolbarButtonHoverBrush}" />
+						<Setter Property="Foreground" Value="{StaticResource UIFontBrush}" />
+					</Trigger.Setters>
+				</Trigger>
+				<Trigger Property="IsPressed" Value="True">
+					<Trigger.Setters>
+						<Setter Property="Background" Value="{StaticResource ToolbarButtonClickBrush}" />
+						<Setter Property="Foreground" Value="{StaticResource MainWindowBackgroundBrush}" />
+					</Trigger.Setters>
+				</Trigger>
+			</Style.Triggers>
+			
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="Foreground" Value="{StaticResource UILightFontBrush}" />
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="MinWidth" Value="{StaticResource MainWindowToolbarHeight}" />
+			
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid Background="{TemplateBinding Background}">
+							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+				
+		</Style>
+		
+	</Window.Resources>
+
+	<DockPanel>
+		<DockPanel DockPanel.Dock="Top"
+				   shell:WindowChrome.IsHitTestVisibleInChrome="True"
+				   HorizontalAlignment="Right"
+				   Height="{StaticResource MainWindowToolbarHeight}">
+			<Button DockPanel.Dock="Right"
+					Click="Window_Close"
+					Style="{StaticResource ToolbarButton}">X</Button>
+			<Button DockPanel.Dock="Right"
+					Click="Window_Maximize"
+					Style="{StaticResource ToolbarButton}">M</Button>
+			<Button DockPanel.Dock="Right"
+					Click="Window_Minimize"
+					Style="{StaticResource ToolbarButton}">_</Button>
+		</DockPanel>
+		<Grid />
+	</DockPanel>
 </Window>

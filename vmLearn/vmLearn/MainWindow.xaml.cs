@@ -28,5 +28,23 @@ namespace vmLearn
 		{
 			this.DragMove();
 		}
+
+		private void Window_Close(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
+
+		private void Window_Minimize(object sender, RoutedEventArgs e)
+		{
+			this.WindowState = WindowState.Minimized;
+		}
+
+		private void Window_Maximize(object sender, RoutedEventArgs e)
+		{
+			if (this.WindowState == WindowState.Maximized)
+				this.WindowState = WindowState.Normal;
+			else
+				this.WindowState = WindowState.Maximized;
+		}
 	}
 }
