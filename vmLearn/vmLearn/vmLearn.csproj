@@ -110,6 +110,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{172B4E65-A79F-42CA-AE78-A0B39056281D}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\vm\vm.csproj">
       <Project>{EBAC7BC8-4743-464D-B28B-A6E6B9F60D07}</Project>
       <Name>vm</Name>

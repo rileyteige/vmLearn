@@ -114,12 +114,13 @@
 				</ListBox>
 			</Grid>
 
-			<TextBox x:Name="OutputTextBox" Margin="{StaticResource MainGridCellMargin}"
+			<TextBox x:Name="IOTextBox" Margin="{StaticResource MainGridCellMargin}"
 					 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
 					 FontFamily="Lucida Console"
 					 FontWeight="Bold"
 					 FontSize="12"
-					 BorderBrush="Gray"/>
+					 BorderBrush="Gray"
+					 KeyDown="IOTextBox_KeyDown"/>
 		</Grid>
 	</DockPanel>
 </Window>

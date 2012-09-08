@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Utility;
 using vm;
 
 namespace vmLearn
@@ -37,9 +38,24 @@ namespace vmLearn
 		private void AppModel_OutputChanged(object sender, EventArgs e)
 		{
 			VirtualMachine vm = sender as VirtualMachine;
-			TextBox textBox = (TextBox)FindName("OutputTextBox");
+			TextBox textBox = (TextBox)FindName("IOTextBox");
+
 			if (textBox != null)
-				textBox.Text += vm.Output;
+			{
+				textBox.AppendText(vm.Output);
+				textBox.CaretIndex += 1;
+			}
+		}
+
+		private void IOTextBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			Key key = e.Key;
+			char input = KeyboardUtility.GetCharFromKey(key);
+			Console.WriteLine("Key = '{0}'", input);
+			if (input == ' ' && !(e.Key == Key.Space || e.SystemKey == Key.Space))
+				return;
+
+			m_appModel.VirtualMachine.ProcessInput(input);
 		}
 
 		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

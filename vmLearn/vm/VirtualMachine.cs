@@ -38,6 +38,11 @@ namespace vm
 			Output = msg;
 		}
 
+		public void ProcessInput(char input)
+		{
+			Write(input + "");
+		}
+
 		private string m_output;
 	}
 }
