@@ -14,8 +14,7 @@ namespace vm
 
 		public void Initialize()
 		{
-			for (int i = 0; i < 100; i++)
-				Write(i + "\n");
+			Write("VM Initialized.");
 		}
 
 		public event EventHandler OutputChanged;

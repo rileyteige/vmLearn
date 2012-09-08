@@ -26,6 +26,7 @@ namespace vmLearn
 		{
 			InitializeComponent();
 			m_appModel = new AppModel();
+			this.DataContext = m_appModel;
 			ConnectIO();
 			m_appModel.Initialize();
 		}

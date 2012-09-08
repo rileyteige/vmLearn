@@ -3,8 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
 		xmlns:resx="clr-namespace:vmLearn.Resources"
+		xmlns:vm="clr-namespace:vm;assembly=vm"
         Title="{x:Static resx:OurResources.AppTitle}"
-		Width="1024" Height="640"
+		Width="1240" Height="680"
+		WindowStartupLocation="CenterScreen"
 		WindowStyle="SingleBorderWindow"
 		ResizeMode="CanResizeWithGrip"
 		Background="{StaticResource MainWindowBackgroundBrush}"
@@ -87,17 +89,22 @@
 				<RowDefinition Height="1.5*"/>
 			</Grid.RowDefinitions>
 
-			<ListBox x:Name="CodeMemoryListBox" Margin="{StaticResource MainGridCellMargin}"
+			<ListBox x:Name="CodeMemoryListBox" 
+					 DataContext="{Binding VirtualMachine}"
+					 Margin="{StaticResource MainGridCellMargin}"
 					 Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
-				<ListBoxItem>Some Code Here</ListBoxItem>
+				<ListBoxItem Content="{Binding Output}" />
 			</ListBox>
 
-			<ListBox x:Name="DataMemoryListBox" Margin="{StaticResource MainGridCellMargin}"
+			<ListBox x:Name="DataMemoryListBox"
+					 DataContext="{Binding VirtualMachine}"
+					 Margin="{StaticResource MainGridCellMargin}"
 					 Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
-				<ListBoxItem>Some Data Here</ListBoxItem>
+				<ListBoxItem Content="{Binding Output}" />
 			</ListBox>
 
-			<Grid Grid.Row="1" Grid.Column="1">
+			<Grid Grid.Row="1" Grid.Column="1"
+				  DataContext="{Binding VirtualMachine}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition />
 					<ColumnDefinition />
@@ -105,12 +112,12 @@
 				
 				<ListBox x:Name="RegisterListBox" Margin="{StaticResource MainGridCellMargin}"
 						 Grid.Column="0">
-					<ListBoxItem>Some Registers</ListBoxItem>
+					<ListBoxItem Content="{Binding Output}" />
 				</ListBox>
 				
 				<ListBox x:Name="TranslationListBox" Margin="{StaticResource MainGridCellMargin}"
 						 Grid.Column="1">
-					<ListBoxItem>Some Translation</ListBoxItem>
+					<ListBoxItem Content="{Binding Output}" />
 				</ListBox>
 			</Grid>
 
