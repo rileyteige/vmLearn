@@ -55,6 +55,9 @@
 	</Window.Resources>
 
 	<DockPanel>
+		
+		<!-- Toolbar -->
+		
 		<DockPanel DockPanel.Dock="Top"
 				   shell:WindowChrome.IsHitTestVisibleInChrome="True"
 				   HorizontalAlignment="Right"
@@ -69,6 +72,54 @@
 					Click="Window_Minimize"
 					Style="{StaticResource ToolbarButton}">_</Button>
 		</DockPanel>
-		<Grid />
+		
+		<!-- Window Content -->
+		
+		<Grid Margin="16, 8, 16, 8">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition Width="2*" MinWidth="200"/>
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition Height="1.5*"/>
+			</Grid.RowDefinitions>
+
+			<ListBox x:Name="CodeMemoryListBox" Margin="{StaticResource MainGridCellMargin}"
+					 Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+				<ListBoxItem>Some Code Here</ListBoxItem>
+			</ListBox>
+
+			<ListBox x:Name="DataMemoryListBox" Margin="{StaticResource MainGridCellMargin}"
+					 Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+				<ListBoxItem>Some Data Here</ListBoxItem>
+			</ListBox>
+
+			<Grid Grid.Row="1" Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				
+				<ListBox x:Name="RegisterListBox" Margin="{StaticResource MainGridCellMargin}"
+						 Grid.Column="0">
+					<ListBoxItem>Some Registers</ListBoxItem>
+				</ListBox>
+				
+				<ListBox x:Name="TranslationListBox" Margin="{StaticResource MainGridCellMargin}"
+						 Grid.Column="1">
+					<ListBoxItem>Some Translation</ListBoxItem>
+				</ListBox>
+			</Grid>
+
+			<TextBox x:Name="OutputTextBox" Margin="{StaticResource MainGridCellMargin}"
+					 Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+					 FontFamily="Lucida Console"
+					 FontWeight="Bold"
+					 FontSize="12"
+					 BorderBrush="Gray"/>
+		</Grid>
 	</DockPanel>
 </Window>

@@ -5,6 +5,8 @@
 	<!-- Colors -->
 	
 	<Color x:Key="MainWindowBackgroundColor">#FFFFFF</Color>
+	<Color x:Key="TextBoxBackgroundColor">#525252</Color>
+	<Color x:Key="TextBoxFontColor">#06C21F</Color>
 	<Color x:Key="ToolbarButtonHoverColor">#EBEBEB</Color>
 	<Color x:Key="ToolbarButtonClickColor">#3697FF</Color>
 	<Color x:Key="UIFontColor">#000000</Color>
@@ -13,13 +15,20 @@
 	<!-- Brushes -->
 	
 	<SolidColorBrush x:Key="MainWindowBackgroundBrush" Color="{StaticResource MainWindowBackgroundColor}" />
+	<SolidColorBrush x:Key="TextBoxBackgroundBrush" Color="{StaticResource TextBoxBackgroundColor}" />
+	<SolidColorBrush x:Key="TextBoxFontBrush" Color="{StaticResource TextBoxFontColor}" />
 	<SolidColorBrush x:Key="ToolbarButtonHoverBrush" Color="{StaticResource ToolbarButtonHoverColor}" />
 	<SolidColorBrush x:Key="ToolbarButtonClickBrush" Color="{StaticResource ToolbarButtonClickColor}" />
 	<SolidColorBrush x:Key="UIFontBrush" Color="{StaticResource UIFontColor}" />
 	<SolidColorBrush x:Key="UILightFontBrush" Color="{StaticResource UILightFontColor}" />
 	
+	<!-- Fonts -->
+	
+	<sys:String x:Key="TextBoxFontName">Terminal</sys:String>
+	
 	<!-- Numerical Values -->
 	
+	<Thickness x:Key="MainGridCellMargin">8,8,8,8</Thickness>
 	<sys:Double x:Key="MainWindowToolbarHeight">35.0</sys:Double>
 	
 </ResourceDictionary>
