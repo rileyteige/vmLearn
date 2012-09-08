@@ -4,6 +4,7 @@
 		xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
 		xmlns:resx="clr-namespace:vmLearn.Resources"
 		xmlns:vm="clr-namespace:vm;assembly=vm"
+		xmlns:vmStorage="clr-namespace:vm.Storage;assembly=vm"
         Title="{x:Static resx:OurResources.AppTitle}"
 		Width="1240" Height="680"
 		WindowStartupLocation="CenterScreen"
@@ -17,45 +18,9 @@
 							GlassFrameThickness="0,0,0,1"
 							ResizeBorderThickness="5" />
 	</shell:WindowChrome.WindowChrome>
-	
-	<Window.Resources>
-		
-		<Style x:Key="ToolbarButton" TargetType="{x:Type Button}">
-			
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Trigger.Setters>
-						<Setter Property="Background" Value="{StaticResource ToolbarButtonHoverBrush}" />
-						<Setter Property="Foreground" Value="{StaticResource UIFontBrush}" />
-					</Trigger.Setters>
-				</Trigger>
-				<Trigger Property="IsPressed" Value="True">
-					<Trigger.Setters>
-						<Setter Property="Background" Value="{StaticResource ToolbarButtonClickBrush}" />
-						<Setter Property="Foreground" Value="{StaticResource MainWindowBackgroundBrush}" />
-					</Trigger.Setters>
-				</Trigger>
-			</Style.Triggers>
-			
-			<Setter Property="Background" Value="Transparent" />
-			<Setter Property="Foreground" Value="{StaticResource UILightFontBrush}" />
-			<Setter Property="FontWeight" Value="Bold" />
-			<Setter Property="MinWidth" Value="{StaticResource MainWindowToolbarHeight}" />
-			
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type Button}">
-						<Grid Background="{TemplateBinding Background}">
-							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
-						</Grid>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-				
-		</Style>
-		
-	</Window.Resources>
 
+	<!-- Main View -->
+	
 	<DockPanel>
 		
 		<!-- Toolbar -->
@@ -92,16 +57,14 @@
 			<ListBox x:Name="CodeMemoryListBox" 
 					 DataContext="{Binding VirtualMachine}"
 					 Margin="{StaticResource MainGridCellMargin}"
-					 Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
-				<ListBoxItem Content="{Binding Output}" />
-			</ListBox>
+					 Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+					 ItemsSource="{Binding Code}" />
 
 			<ListBox x:Name="DataMemoryListBox"
 					 DataContext="{Binding VirtualMachine}"
 					 Margin="{StaticResource MainGridCellMargin}"
-					 Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
-				<ListBoxItem Content="{Binding Output}" />
-			</ListBox>
+					 Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
+					 ItemsSource="{Binding Data}" />
 
 			<Grid Grid.Row="1" Grid.Column="1"
 				  DataContext="{Binding VirtualMachine}">
@@ -111,9 +74,8 @@
 				</Grid.ColumnDefinitions>
 				
 				<ListBox x:Name="RegisterListBox" Margin="{StaticResource MainGridCellMargin}"
-						 Grid.Column="0">
-					<ListBoxItem Content="{Binding Output}" />
-				</ListBox>
+						 Grid.Column="0"
+						 ItemsSource="{Binding Registers}" />
 				
 				<ListBox x:Name="TranslationListBox" Margin="{StaticResource MainGridCellMargin}"
 						 Grid.Column="1">

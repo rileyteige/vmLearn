@@ -52,7 +52,6 @@ namespace vmLearn
 		{
 			Key key = e.Key;
 			char input = KeyboardUtility.GetCharFromKey(key);
-			Console.WriteLine("Key = '{0}'", input);
 			if (input == ' ' && !(e.Key == Key.Space || e.SystemKey == Key.Space))
 				return;
 
