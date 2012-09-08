@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -22,6 +23,32 @@ namespace vmLearn
 		public MainWindow()
 		{
 			InitializeComponent();
+			m_appModel = new AppModel();
+			ConnectIO();
+			InitializeVM();
+		}
+
+		private void ConnectIO()
+		{
+			m_appModel.Output.OutputChanged += new EventHandler(AppModel_OutputChanged);
+		}
+
+		private void InitializeVM()
+		{
+			m_appModel.VirtualMachine.Initialize();
+		}
+
+		private void AppModel_OutputChanged(object sender, EventArgs e)
+		{
+			using (Stream stream = sender as Stream)
+			using (StreamReader reader = new StreamReader(stream))
+			{
+				stream.Position = 0;
+				string newOutput = reader.ReadToEnd();
+				TextBox textBox = (TextBox)FindName("OutputTextBox");
+				if (textBox != null)
+					textBox.Text += newOutput;
+			}
 		}
 
 		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -46,5 +73,7 @@ namespace vmLearn
 			else
 				this.WindowState = WindowState.Maximized;
 		}
+
+		AppModel m_appModel;
 	}
 }
