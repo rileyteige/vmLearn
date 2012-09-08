@@ -8,27 +8,36 @@ namespace vm
 {
 	public class VirtualMachine
 	{
-		public VirtualMachine(OutputStream output)
+		public VirtualMachine()
 		{
-			m_output = output;
 		}
 
 		public void Initialize()
 		{
-			Write("VM Initialized.");
+			for (int i = 0; i < 100; i++)
+				Write(i + "\n");
 		}
 
-		public OutputStream Output
+		public event EventHandler OutputChanged;
+		public string Output
 		{
-			get { return m_output; }
+			get
+			{
+				return m_output;
+			}
+			set
+			{
+				m_output = value;
+				if (OutputChanged != null)
+					OutputChanged(this, new EventArgs());
+			}
 		}
 
 		private void Write(string msg)
 		{
-			System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
-			Output.Write(encoder.GetBytes(msg), 0, msg.Length);
+			Output = msg;
 		}
 
-		private OutputStream m_output;
+		private string m_output;
 	}
 }

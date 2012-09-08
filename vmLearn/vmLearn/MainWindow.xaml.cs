@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using vm;
 
 namespace vmLearn
 {
@@ -25,30 +26,20 @@ namespace vmLearn
 			InitializeComponent();
 			m_appModel = new AppModel();
 			ConnectIO();
-			InitializeVM();
+			m_appModel.Initialize();
 		}
 
 		private void ConnectIO()
 		{
-			m_appModel.Output.OutputChanged += new EventHandler(AppModel_OutputChanged);
-		}
-
-		private void InitializeVM()
-		{
-			m_appModel.VirtualMachine.Initialize();
+			m_appModel.VirtualMachine.OutputChanged += new EventHandler(AppModel_OutputChanged);
 		}
 
 		private void AppModel_OutputChanged(object sender, EventArgs e)
 		{
-			using (Stream stream = sender as Stream)
-			using (StreamReader reader = new StreamReader(stream))
-			{
-				stream.Position = 0;
-				string newOutput = reader.ReadToEnd();
-				TextBox textBox = (TextBox)FindName("OutputTextBox");
-				if (textBox != null)
-					textBox.Text += newOutput;
-			}
+			VirtualMachine vm = sender as VirtualMachine;
+			TextBox textBox = (TextBox)FindName("OutputTextBox");
+			if (textBox != null)
+				textBox.Text += vm.Output;
 		}
 
 		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

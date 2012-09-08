@@ -11,13 +11,12 @@ namespace vmLearn
 	{
 		public AppModel()
 		{
-			m_output = new OutputStream();
-			m_virtualMachine = new VirtualMachine(Output);
+			m_virtualMachine = new VirtualMachine();
 		}
 
-		public OutputStream Output
+		public void Initialize()
 		{
-			get { return m_output; }
+			VirtualMachine.Initialize();
 		}
 
 		public VirtualMachine VirtualMachine
@@ -26,7 +25,5 @@ namespace vmLearn
 		}
 
 		VirtualMachine m_virtualMachine;
-
-		OutputStream m_output;
 	}
 }
