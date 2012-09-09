@@ -2,9 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:vmStorage="clr-namespace:vm.Storage;assembly=vm">
 	<DataTemplate DataType="{x:Type vmStorage:Register}">
-		<StackPanel Orientation="Horizontal">
-			<TextBlock Text="{Binding Name}" />
-			<TextBlock Text="{Binding Bits}" />
-		</StackPanel>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition SharedSizeGroup="RegisterNames"/>
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<TextBlock Margin="0,0,4,0" Grid.Column="0" Text="{Binding Name}" />
+			<TextBlock Grid.Column="1" Text="{Binding Bits}" />
+		</Grid>
 	</DataTemplate>
 </ResourceDictionary>

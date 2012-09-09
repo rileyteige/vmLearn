@@ -42,7 +42,9 @@
 		
 		<!-- Window Content -->
 		
-		<Grid Margin="16, 8, 16, 8">
+		<Grid Margin="16, 8, 16, 8"
+			  TextBlock.FontFamily="{StaticResource UIFontFamily}"
+			  TextBlock.FontSize="{StaticResource UIFontSize}">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
 				<ColumnDefinition Width="2*" MinWidth="200"/>
@@ -54,17 +56,22 @@
 				<RowDefinition Height="1.5*"/>
 			</Grid.RowDefinitions>
 
-			<ListBox x:Name="CodeMemoryListBox" 
+			<Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" 
+				  IsSharedSizeScope="True">
+				<ListBox x:Name="CodeMemoryListBox" 
 					 DataContext="{Binding VirtualMachine}"
 					 Margin="{StaticResource MainGridCellMargin}"
-					 Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
 					 ItemsSource="{Binding Code}" />
+			</Grid>
 
-			<ListBox x:Name="DataMemoryListBox"
-					 DataContext="{Binding VirtualMachine}"
-					 Margin="{StaticResource MainGridCellMargin}"
-					 Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
-					 ItemsSource="{Binding Data}" />
+			<Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" 
+				  IsSharedSizeScope="True">
+				<ListBox x:Name="DataMemoryListBox"
+						 ItemContainerStyle="{StaticResource StretchedContainerStyle}"
+						 DataContext="{Binding VirtualMachine}"
+						 Margin="{StaticResource MainGridCellMargin}"
+						 ItemsSource="{Binding Data}" />
+			</Grid>
 
 			<Grid Grid.Row="1" Grid.Column="1"
 				  DataContext="{Binding VirtualMachine}">
@@ -72,15 +79,17 @@
 					<ColumnDefinition />
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
-				
-				<ListBox x:Name="RegisterListBox" Margin="{StaticResource MainGridCellMargin}"
-						 Grid.Column="0"
-						 ItemsSource="{Binding Registers}" />
-				
-				<ListBox x:Name="TranslationListBox" Margin="{StaticResource MainGridCellMargin}"
-						 Grid.Column="1">
-					<ListBoxItem Content="{Binding Output}" />
-				</ListBox>
+
+				<Grid IsSharedSizeScope="True">
+					<ItemsControl x:Name="RegisterListBox" Margin="{StaticResource MainGridCellMargin}"
+							 Grid.Column="0"
+							 BorderThickness="0"
+							 ItemsSource="{Binding Registers}" />
+				</Grid>
+
+				<TextBlock x:Name="TranslationListBox" Margin="{StaticResource MainGridCellMargin}"
+						   Grid.Column="1"
+						   Text="Translations go here" />
 			</Grid>
 
 			<TextBox x:Name="IOTextBox" Margin="{StaticResource MainGridCellMargin}"

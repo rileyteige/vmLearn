@@ -24,11 +24,13 @@
 	
 	<!-- Fonts -->
 	
+	<FontFamily x:Key="UIFontFamily">Courier New</FontFamily>
 	<sys:String x:Key="TextBoxFontName">Terminal</sys:String>
 	
 	<!-- Numerical Values -->
 	
 	<Thickness x:Key="MainGridCellMargin">8,8,8,8</Thickness>
 	<sys:Double x:Key="MainWindowToolbarHeight">35.0</sys:Double>
+	<sys:Double x:Key="UIFontSize">14.0</sys:Double>
 	
 </ResourceDictionary>

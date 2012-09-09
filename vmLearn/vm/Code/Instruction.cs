@@ -5,7 +5,7 @@ using System.Text;
 
 namespace vm.Code
 {
-	public class Instruction
+	public class Instruction : IInstruction
 	{
 		public Instruction(string name)
 		{
@@ -15,6 +15,11 @@ namespace vm.Code
 		public string Name
 		{
 			get { return m_name; }
+		}
+
+		public virtual int ArgsExpected()
+		{
+			return 0;
 		}
 
 		string m_name;

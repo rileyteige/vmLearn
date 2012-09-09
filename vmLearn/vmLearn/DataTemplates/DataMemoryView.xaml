@@ -3,10 +3,16 @@
 					xmlns:vmStorage="clr-namespace:vm.Storage;assembly=vm">
 	
 	<DataTemplate DataType="{x:Type vmStorage:DataMemory}">
-		<StackPanel Orientation="Horizontal">
-			<TextBlock Text="{Binding Address}" />
-			<TextBlock Text="{Binding Bits}" />
-		</StackPanel>
+		<DockPanel>
+			<Grid Margin="4,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition SharedSizeGroup="AddressColumn"/>
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<TextBlock Grid.Column="0" Text="{Binding Address}" />
+				<TextBlock Grid.Column="1" TextAlignment="Right" Text="{Binding Bits}" />
+			</Grid>
+		</DockPanel>
 	</DataTemplate>
     
 </ResourceDictionary>

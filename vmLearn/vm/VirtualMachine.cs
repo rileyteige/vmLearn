@@ -10,14 +10,16 @@ namespace vm
 	{
 		public VirtualMachine()
 		{
-			m_code = new List<Instruction> { new Instruction("push"), new Instruction("pop") };
+			m_code = new List<IInstruction> { new Instruction("push"), new Instruction("pop"), new UnaryInstruction("call"), new BinaryInstruction("add") };
 			CreateRegisters();
 			ConstructData();
 		}
 
 		public void Initialize()
-		{			
-			Write("VM Initialized.");
+		{
+			Write("VM Starting...");
+			Write(string.Format("\nAvailable memory: {0} {1}-bit words", vmConstants.MEMORY_CAPACITY, vmConstants.BUS_WIDTH));
+			Write("\nVM Initialized.");
 		}
 
 		public List<Register> Registers
@@ -30,7 +32,7 @@ namespace vm
 			}
 		}
 
-		public List<Instruction> Code
+		public List<IInstruction> Code
 		{
 			get { return m_code; }
 		}
@@ -84,7 +86,7 @@ namespace vm
 			Write(input + "");
 		}
 
-		private List<Instruction> m_code;
+		private List<IInstruction> m_code;
 		private DataMemory[] m_data;
 		private Dictionary<string, Register> m_registers;
 
