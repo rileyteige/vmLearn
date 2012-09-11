@@ -4,6 +4,7 @@
 		<ResourceDictionary Source="BinaryInstructionView.xaml" />
 		<ResourceDictionary Source="DataMemoryView.xaml" />
 		<ResourceDictionary Source="InstructionView.xaml" />
+		<ResourceDictionary Source="OperandView.xaml" />
 		<ResourceDictionary Source="RegisterView.xaml" />
 		<ResourceDictionary Source="UnaryInstructionView.xaml" />
 	</ResourceDictionary.MergedDictionaries>

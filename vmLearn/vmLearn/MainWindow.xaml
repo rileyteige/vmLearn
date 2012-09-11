@@ -64,6 +64,22 @@
 					 ItemsSource="{Binding Code}" />
 			</Grid>
 
+			<Grid Grid.Row="0" Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				
+				<Button x:Name="StartButton"
+						Grid.Column="0"
+						Margin="30"
+						Click="StartButton_Click">Start</Button>
+				<Button x:Name="ResetButton"
+						Grid.Column="1"
+						Margin="30"
+						Click="ResetButton_Click">Reset</Button>
+			</Grid>
+
 			<Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" 
 				  IsSharedSizeScope="True">
 				<ListBox x:Name="DataMemoryListBox"
@@ -73,8 +89,7 @@
 						 ItemsSource="{Binding Data}" />
 			</Grid>
 
-			<Grid Grid.Row="1" Grid.Column="1"
-				  DataContext="{Binding VirtualMachine}">
+			<Grid Grid.Row="1" Grid.Column="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition />
 					<ColumnDefinition />
@@ -88,6 +103,7 @@
 				</Grid>
 
 				<TextBlock x:Name="TranslationListBox" Margin="{StaticResource MainGridCellMargin}"
+						   DataContext="{Binding VirtualMachine}"
 						   Grid.Column="1"
 						   Text="Translations go here" />
 			</Grid>
@@ -98,7 +114,8 @@
 					 FontWeight="Bold"
 					 FontSize="12"
 					 BorderBrush="Gray"
-					 KeyDown="IOTextBox_KeyDown"/>
+					 KeyDown="IOTextBox_KeyDown"
+					 TextChanged="IOTextBox_TextChanged"/>
 		</Grid>
 	</DockPanel>
 </Window>

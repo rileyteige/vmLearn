@@ -43,10 +43,13 @@
     <Compile Include="Code\BinaryInstruction.cs" />
     <Compile Include="Code\IInstruction.cs" />
     <Compile Include="Code\Instruction.cs" />
+    <Compile Include="Code\Operand.cs" />
     <Compile Include="Code\UnaryInstruction.cs" />
     <Compile Include="Storage\DataMemory.cs" />
     <Compile Include="Storage\Register.cs" />
+    <Compile Include="Storage\StorageBase.cs" />
     <Compile Include="Utility\BinaryToInstructionUtility.cs" />
+    <Compile Include="Utility\BinaryToRegisterNameUtility.cs" />
     <Compile Include="VirtualMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="vmConstants.cs" />

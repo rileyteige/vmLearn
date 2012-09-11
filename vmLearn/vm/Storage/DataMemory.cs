@@ -5,22 +5,16 @@ using System.Text;
 
 namespace vm.Storage
 {
-	public class DataMemory
+	public class DataMemory : StorageBase
 	{
 		public DataMemory(int address)
 		{
-			m_address = address;
-			m_data = new short[vmConstants.BUS_WIDTH];
+			m_address = string.Format("{0:X2}", address);
 		}
 
-		public int Address
+		public string Address
 		{
 			get { return m_address; }
-		}
-
-		public short[] Data
-		{
-			get { return m_data; }
 		}
 
 		public string Bits
@@ -28,13 +22,12 @@ namespace vm.Storage
 			get
 			{
 				string rtn = string.Empty;
-				for (int idx = 0; idx < m_data.Length; idx++)
-					rtn += m_data[idx] == 1 ? "1" : "0";
+				for (int idx = 0; idx < Data.Length; idx++)
+					rtn += Data[idx] == 1 ? "1" : "0";
 				return rtn;
 			}
 		}
 
-		short[] m_data;
-		int m_address;
+		string m_address;
 	}
 }

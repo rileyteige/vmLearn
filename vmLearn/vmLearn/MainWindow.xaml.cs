@@ -58,6 +58,33 @@ namespace vmLearn
 			m_appModel.VirtualMachine.ProcessInput(input);
 		}
 
+		private void IOTextBox_TextChanged(object sender, RoutedEventArgs e)
+		{
+			ScrollTextBoxToEnd();
+		}
+
+		private void ScrollTextBoxToEnd()
+		{
+			TextBox textBox = (TextBox)this.FindName("IOTextBox");
+			if (textBox == null)
+				return;
+
+			textBox.Focus();
+			textBox.SelectionStart = textBox.Text.Length;
+			textBox.ScrollToEnd();
+			textBox.InvalidateVisual();
+		}
+
+		private void StartButton_Click(object sender, RoutedEventArgs e)
+		{
+			m_appModel.StartVirtualMachine();
+		}
+
+		private void ResetButton_Click(object sender, RoutedEventArgs e)
+		{
+			m_appModel.ResetVirtualMachine();
+		}
+
 		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			this.DragMove();

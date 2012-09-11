@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:vmCode="clr-namespace:vm.Code;assembly=vm">
+	<DataTemplate DataType="{x:Type vmCode:Operand}">
+		<TextBlock Text="{Binding Value}" />
+	</DataTemplate>
+</ResourceDictionary>
