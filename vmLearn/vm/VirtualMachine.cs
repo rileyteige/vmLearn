@@ -135,9 +135,9 @@ namespace vm
 			}
 		}
 
-		private void Write(string msg)
+		private void Write(string msg, params object[] arg)
 		{
-			Output = msg;
+			Output = string.Format(msg, arg);
 		}
 
 		public void ProcessInput(char input)
