@@ -24,11 +24,19 @@ namespace vmLearn
 	{
 		public MainWindow()
 		{
+			Test();
 			InitializeComponent();
 			m_appModel = new AppModel();
 			this.DataContext = m_appModel;
 			ConnectEvents();
 			m_appModel.Initialize();
+		}
+
+		// For running pre-VM tests on methods.
+		private void Test()
+		{
+			for (int i = 10; i >= -10; i--)
+				Console.WriteLine("{0}: {1}", i, BinaryUtility.ConvertIntToBinaryString(i, 16));
 		}
 
 		private void ConnectEvents()

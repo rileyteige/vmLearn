@@ -229,6 +229,15 @@ namespace vm
 						int sum = leftInt + rightInt;
 						leftStorage.Data = GetDataForBitString(BinaryUtility.ConvertIntToBinaryString(sum, vmConstants.BUS_WIDTH));
 					} break;
+
+				case "sub":
+					{
+						int diff = leftInt - rightInt;
+						leftStorage.Data = GetDataForBitString(BinaryUtility.ConvertIntToBinaryString(diff, vmConstants.BUS_WIDTH));
+					} break;
+
+				default:
+					throw new ArgumentException(string.Format("Unrecognized instruction: {0}", instruction.Name));
 			}
 		}
 

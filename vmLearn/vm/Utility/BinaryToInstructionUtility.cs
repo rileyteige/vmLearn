@@ -14,7 +14,8 @@ namespace vm.Utility
 			{ "00000000", "mov" },
 			{ "00000001", "push" },
 			{ "00000010", "pop" },
-			{ "00000011", "add" }
+			{ "00000011", "add" },
+			{ "00000100", "sub" }
 		};
 
 		private static List<string> Instructions = new List<string>
@@ -30,7 +31,8 @@ namespace vm.Utility
 		private static List<string> BinaryInstructions = new List<string>
 		{
 			"mov",
-			"add"
+			"add",
+			"sub"
 		};
 
 		private static Operand CreateOperand(string memoryFlag, string registerFlag, string bits)

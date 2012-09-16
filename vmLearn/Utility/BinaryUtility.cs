@@ -11,28 +11,28 @@ namespace Utility
 		{
 			string newBits = string.Empty;
 
-			bool carried = false;
-
+			// Increment
+			bool needsBreak = false;
 			foreach (char bit in bits.Reverse())
 			{
 				char nextBit;
 
 				if (bit == '1')
 				{
-					nextBit = carried ? '1' : '0';
-					carried = true;
+					nextBit = '0';
 				}
 				else
 				{
 					nextBit = '1';
-					carried = false;
+					needsBreak = true;
 				}
 
 				newBits = nextBit + newBits;
-				if (nextBit == '1' && !carried)
+				if (needsBreak)
 					break;
 			}
 
+			// Carry in remaining bits
 			int idx = bits.Length - newBits.Length - 1;
 			while (newBits.Length < bits.Length)
 			{
@@ -40,6 +40,7 @@ namespace Utility
 				idx--;
 			}
 
+			// If newBits became longer than bits, we only want bits.Length # of bits.
 			return newBits.Substring(newBits.Length - bits.Length, bits.Length);
 		}
 
@@ -55,6 +56,8 @@ namespace Utility
 		public static string ConvertIntToBinaryString(int number, int buswidth)
 		{
 			bool twosComplement = number < 0;
+
+			// Make positive for modulus comparisons
 			if (twosComplement)
 				number *= -1;
 
