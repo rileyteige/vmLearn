@@ -199,6 +199,17 @@ namespace vm
 			return data;
 		}
 
+		private string IntToBinaryString(int num)
+		{
+			int width = vmConstants.BUS_WIDTH;
+			return BinaryUtility.ConvertIntToBinaryString(num, width);
+		}
+
+		private short[] IntToData(int num)
+		{
+			return GetDataForBitString(IntToBinaryString(num));
+		}
+
 		private void ExecuteBinaryInstruction(BinaryInstruction instruction)
 		{
 			string name = instruction.Name;
@@ -227,17 +238,29 @@ namespace vm
 				case "add":
 					{
 						int sum = leftInt + rightInt;
-						leftStorage.Data = GetDataForBitString(BinaryUtility.ConvertIntToBinaryString(sum, vmConstants.BUS_WIDTH));
+						leftStorage.Data = IntToData(sum);
 					} break;
 
 				case "sub":
 					{
 						int diff = leftInt - rightInt;
-						leftStorage.Data = GetDataForBitString(BinaryUtility.ConvertIntToBinaryString(diff, vmConstants.BUS_WIDTH));
+						leftStorage.Data = IntToData(diff);
+					} break;
+
+				case "mul":
+					{
+						int prod = leftInt * rightInt;
+						leftStorage.Data = IntToData(prod);
+					} break;
+
+				case "div":
+					{
+						int quot = leftInt / rightInt;
+						leftStorage.Data = IntToData(quot);
 					} break;
 
 				default:
-					throw new ArgumentException(string.Format("Unrecognized instruction: {0}", instruction.Name));
+					throw new ArgumentException(string.Format("Instruction without implementation: {0}", instruction.Name));
 			}
 		}
 
