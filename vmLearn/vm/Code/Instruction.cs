@@ -17,11 +17,27 @@ namespace vm.Code
 			get { return m_name; }
 		}
 
+		public event EventHandler IsCurrentChanged;
+		public bool IsCurrent
+		{
+			get
+			{
+				return m_isCurrent;
+			}
+			set
+			{
+				m_isCurrent = value;
+				if (IsCurrentChanged != null)
+					IsCurrentChanged(this, new EventArgs());
+			}
+		}
+
 		public virtual int ArgsExpected()
 		{
 			return 0;
 		}
 
 		string m_name;
+		bool m_isCurrent;
 	}
 }

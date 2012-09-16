@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Utility;
 using vm.Code;
 using vm.Storage;
 using vm.Utility;
@@ -24,8 +25,15 @@ namespace vm
 			InitializeRegisterData();
 
 			LoadCode("../../testCodeFile.txt");
+			m_codeEnumerator = m_code.GetEnumerator();
 
 			Write("\nVM Initialized.");
+		}
+
+		public bool NeedsReset
+		{
+			get { return m_needsReset; }
+			private set { m_needsReset = value; }
 		}
 
 		public List<Register> Registers
@@ -60,6 +68,21 @@ namespace vm
 				m_output = value;
 				if (OutputChanged != null)
 					OutputChanged(this, new EventArgs());
+			}
+		}
+
+		public event EventHandler CurrentInstructionChanged;
+		public IInstruction CurrentInstruction
+		{
+			get
+			{
+				return m_currentInstruction;
+			}
+			set
+			{
+				m_currentInstruction = value;
+				if (CurrentInstructionChanged != null)
+					CurrentInstructionChanged(this, new EventArgs());
 			}
 		}
 
@@ -185,15 +208,26 @@ namespace vm
 			StorageBase leftStorage = GetStorageForOperand(left);
 			StorageBase rightStorage = GetStorageForOperand(right);
 
-			string rightval = rightStorage != null ? GetStorageValue(rightStorage) : right.Value;
+			if (leftStorage == null)
+				throw new Exception(string.Format("Bad args, {0}", instruction.Name));
+
+			string leftVal = GetStorageValue(leftStorage);
+			string rightVal = rightStorage != null ? GetStorageValue(rightStorage) : right.Value;
+
+			int leftInt = BinaryToIntegerUtility.LoadSignedInt(leftVal);
+			int rightInt = BinaryToIntegerUtility.LoadSignedInt(rightVal);
 
 			switch (name)
 			{
 				case "mov":
 					{
-						if (leftStorage == null)
-							throw new Exception("Bad args, mov");
-						leftStorage.Data = GetDataForBitString(rightval);
+						leftStorage.Data = GetDataForBitString(rightVal);
+					} break;
+
+				case "add":
+					{
+						int sum = leftInt + rightInt;
+						leftStorage.Data = GetDataForBitString(BinaryUtility.ConvertIntToBinaryString(sum, vmConstants.BUS_WIDTH));
 					} break;
 			}
 		}
@@ -221,6 +255,29 @@ namespace vm
 			}
 		}
 
+		public bool ExecuteNextInstruction()
+		{
+			bool needsBreak = false;
+			if (needsBreak || m_needsReset)
+				return false;
+
+			if (m_codeEnumerator.Current != null)
+				m_codeEnumerator.Current.IsCurrent = false;
+
+			if (!m_codeEnumerator.MoveNext())
+			{
+				NeedsReset = true;
+				return false;
+			}
+			else
+			{
+				CurrentInstruction = m_codeEnumerator.Current;
+				m_codeEnumerator.Current.IsCurrent = true;
+				ExecuteInstruction(m_codeEnumerator.Current);
+				return true;
+			}
+		}
+
 		public void Start()
 		{
 			Write("\nProgram Starting...\n");
@@ -238,8 +295,15 @@ namespace vm
 		public void Reset()
 		{
 			InitializeRegisterData();
+			if (m_codeEnumerator.Current != null)
+				m_codeEnumerator.Current.IsCurrent = false;
+			CurrentInstruction = null;
+			m_codeEnumerator.Reset();
 		}
 
+		private bool m_needsReset;
+		private IEnumerator<IInstruction> m_codeEnumerator;
+		private IInstruction m_currentInstruction;
 		private List<IInstruction> m_code;
 		private DataMemory[] m_data;
 		private Dictionary<string, Register> m_registers;

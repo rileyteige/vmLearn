@@ -1,11 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="BinaryInstructionView.xaml" />
 		<ResourceDictionary Source="DataMemoryView.xaml" />
 		<ResourceDictionary Source="InstructionView.xaml" />
 		<ResourceDictionary Source="OperandView.xaml" />
 		<ResourceDictionary Source="RegisterView.xaml" />
-		<ResourceDictionary Source="UnaryInstructionView.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

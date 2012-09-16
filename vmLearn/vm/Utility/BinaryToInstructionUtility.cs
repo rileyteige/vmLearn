@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utility;
 using vm.Code;
 
 namespace vm.Utility
@@ -12,7 +13,8 @@ namespace vm.Utility
 		{
 			{ "00000000", "mov" },
 			{ "00000001", "push" },
-			{ "00000010", "pop" }
+			{ "00000010", "pop" },
+			{ "00000011", "add" }
 		};
 
 		private static List<string> Instructions = new List<string>
@@ -27,19 +29,25 @@ namespace vm.Utility
 
 		private static List<string> BinaryInstructions = new List<string>
 		{
-			"mov"
+			"mov",
+			"add"
 		};
 
 		private static Operand CreateOperand(string memoryFlag, string registerFlag, string bits)
 		{
+			if (bits.Length != vmConstants.INSTRUCTION_OPERANDLENGTH)
+				throw new ArgumentException("bits");
+
 			Operand operand = new Operand();
 
-			if (memoryFlag == "1")
+			bool memory = memoryFlag == "1";
+			bool register = registerFlag == "1";
+
+			if (memory)
 			{
-				Console.WriteLine("checking {0}...", bits);
 				operand.setAddressValue(string.Format("{0}", Convert.ToInt32(bits.Substring(bits.Length - vmConstants.BUS_WIDTH, vmConstants.BUS_WIDTH), 2)));
 			}
-			else if (registerFlag == "1")
+			else if (register)
 			{
 				string registerName = BinaryToRegisterNameUtility.Convert(bits);
 				if (registerName != null)
@@ -74,9 +82,6 @@ namespace vm.Utility
 			string leftOperandRegisterFlag = bits.Substring(idx, 1);
 			idx += 1;
 
-			string leftOperandNegateFlag = bits.Substring(idx, 1);
-			idx += 1;
-
 			string leftOperandValue = bits.Substring(idx, vmConstants.INSTRUCTION_OPERANDLENGTH);
 			idx += vmConstants.INSTRUCTION_OPERANDLENGTH;
 
@@ -90,8 +95,6 @@ namespace vm.Utility
 
 			string rightOperandRegisterFlag = bits.Substring(idx, 1);
 			idx += 1;
-
-			string rightOperandNegateFlag = bits.Substring(idx, 1);
 
 			string rightOperandValue = bits.Substring(idx, vmConstants.INSTRUCTION_OPERANDLENGTH);
 			idx += vmConstants.INSTRUCTION_OPERANDLENGTH;

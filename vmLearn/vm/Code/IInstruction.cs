@@ -9,5 +9,8 @@ namespace vm.Code
 	{
 		string Name { get; }
 		int ArgsExpected();
+
+		bool IsCurrent { get; set; }
+		event EventHandler IsCurrentChanged;
 	}
 }

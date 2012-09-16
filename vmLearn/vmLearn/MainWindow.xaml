@@ -59,9 +59,11 @@
 			<Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" 
 				  IsSharedSizeScope="True">
 				<ListBox x:Name="CodeMemoryListBox" 
-					 DataContext="{Binding VirtualMachine}"
-					 Margin="{StaticResource MainGridCellMargin}"
-					 ItemsSource="{Binding Code}" />
+						 Margin="{StaticResource MainGridCellMargin}"
+						 ItemsSource="{Binding Instructions}"
+						 SelectedItem="{Binding CurrentInstruction}"
+						 SelectionChanged="CodeMemoryListBox_SelectionChanged">
+				</ListBox>
 			</Grid>
 
 			<Grid Grid.Row="0" Grid.Column="1">
@@ -73,7 +75,7 @@
 				<Button x:Name="StartButton"
 						Grid.Column="0"
 						Margin="30"
-						Click="StartButton_Click">Start</Button>
+						Click="NextButton_Click">Next</Button>
 				<Button x:Name="ResetButton"
 						Grid.Column="1"
 						Margin="30"

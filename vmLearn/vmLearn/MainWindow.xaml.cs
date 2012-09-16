@@ -27,11 +27,11 @@ namespace vmLearn
 			InitializeComponent();
 			m_appModel = new AppModel();
 			this.DataContext = m_appModel;
-			ConnectIO();
+			ConnectEvents();
 			m_appModel.Initialize();
 		}
 
-		private void ConnectIO()
+		private void ConnectEvents()
 		{
 			m_appModel.VirtualMachine.OutputChanged += new EventHandler(AppModel_OutputChanged);
 		}
@@ -45,6 +45,18 @@ namespace vmLearn
 			{
 				textBox.AppendText(vm.Output);
 				textBox.CaretIndex += 1;
+			}
+		}
+
+		private void CodeMemoryListBox_SelectionChanged(object sender, RoutedEventArgs e)
+		{
+			if (CodeMemoryListBox.SelectedItem != null)
+			{
+				CodeMemoryListBox.ScrollIntoView(CodeMemoryListBox.SelectedItem);
+			}
+			else
+			{
+				CodeMemoryListBox.ScrollIntoView(CodeMemoryListBox.Items.GetItemAt(0));
 			}
 		}
 
@@ -75,9 +87,12 @@ namespace vmLearn
 			textBox.InvalidateVisual();
 		}
 
-		private void StartButton_Click(object sender, RoutedEventArgs e)
+		private void NextButton_Click(object sender, RoutedEventArgs e)
 		{
-			m_appModel.StartVirtualMachine();
+			if (m_appModel.ExecuteNextInstruction())
+			{
+				ListBox code = (ListBox)this.FindName("CodeMemoryListBox");
+			}
 		}
 
 		private void ResetButton_Click(object sender, RoutedEventArgs e)
