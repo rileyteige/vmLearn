@@ -16,7 +16,6 @@ namespace vm.Utility
 			{ "011", "d" },
 			{ "100", "f" },
 			{ "101", "s" },
-			{ "110", "pc" }
 		};
 
 		public static string Convert(string bits)
